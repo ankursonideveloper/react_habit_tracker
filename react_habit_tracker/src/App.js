@@ -1,12 +1,27 @@
-import logo from "./logo.svg";
 import "./App.css";
+import { useState } from "react";
 import Tracker from "./Components/Tracker";
-import { data } from "./Information/Data";
+import { habitData } from "./Information/Data";
 
 function App() {
+  let data = () => {
+    return JSON.parse(localStorage.getItem("habits")) ?? habitData;
+  };
+  const [habits, setHabits] = useState(data);
+
+  const modifyData = (id) => {
+    setHabits((prev) => {
+      const newData = prev.map((habit) =>
+        habit.id === id ? { ...habit, completed: !habit.completed } : habit
+      );
+      localStorage.setItem("habits", JSON.stringify(newData));
+      return newData;
+    });
+  };
+
   return (
     <div className="flex mx-auto justify-center mt-10">
-      <Tracker data={data} />
+      <Tracker data={habits} handleHabit={modifyData} />
     </div>
   );
 }

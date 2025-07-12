@@ -1,4 +1,4 @@
-export const data = [
+export const habitData = [
   { id: 1, habitName: "Cricket", completed: true },
   { id: 2, habitName: "Morning Walk", completed: false },
   { id: 3, habitName: "Reading Books", completed: true },

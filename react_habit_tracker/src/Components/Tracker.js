@@ -3,18 +3,15 @@ import Habit from "./Habit";
 
 const Tracker = (props) => {
   const totalHabits = props.data.length;
-  const initialCompletedHabitsCount = props.data.filter((item, index) => {
+
+  const habitCompletedCount = props.data.filter((item, index) => {
     return item.completed === true;
   }).length;
 
-  const [habitCompletedCount, setHabitCompletedCount] = useState(
-    initialCompletedHabitsCount
-  );
-
   return (
-    <div className="max-w-xl mx-auto mt-6 p-6 bg-gray-100 rounded-2xl shadow-lg">
+    <div className="w-1/2 mx-auto mt-6 p-6 bg-gray-100 rounded-2xl shadow-lg">
       <div className="flex justify-center items-center px-4 py-2 bg-white rounded-lg shadow-sm mb-4 gap-2">
-        <p className="text-lg font-semibold text-gray-700">
+        <p className="text-2xl font-semibold text-gray-700">
           {habitCompletedCount}/{totalHabits}
         </p>
         <p className="text-lg font-semibold text-gray-700">Completed</p>
@@ -24,7 +21,7 @@ const Tracker = (props) => {
         <p className="text-lg font-semibold text-gray-700">Today</p>
       </div>
       {props.data.map((item, index) => (
-        <Habit key={index} habitName={item.habitName} />
+        <Habit key={index} data={item} handleHabit={props.handleHabit} />
       ))}
     </div>
   );
